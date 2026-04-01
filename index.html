@@ -1,0 +1,720 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Felipe Correia | Anim4LL</title>
+  <meta name="description" content="Comunicação, imagem e posicionamento estratégico para marcas, profissionais e projetos." />
+  <style>
+    :root {
+      --bg: #070707;
+      --bg-soft: #0d0d0d;
+      --card: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+      --text: #f5f1e8;
+      --muted: #b7afa0;
+      --gold: #b6914b;
+      --gold-soft: rgba(182,145,75,0.14);
+      --white-soft: rgba(255,255,255,0.82);
+      --max: 1180px;
+      --radius: 20px;
+      --shadow: 0 18px 60px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(182,145,75,0.12), transparent 30%),
+        radial-gradient(circle at 70% 60%, rgba(182,145,75,0.08), transparent 28%),
+        linear-gradient(180deg, #050505 0%, #090909 45%, #050505 100%);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent 40%);
+      mix-blend-mode: screen;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(7,7,7,0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-size: 1.35rem;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .brand span { color: var(--gold); }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.95rem;
+      color: var(--white-soft);
+    }
+
+    .menu a {
+      opacity: 0.9;
+      transition: opacity .2s ease, color .2s ease;
+    }
+
+    .menu a:hover { color: var(--text); opacity: 1; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.96rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #c79f55 0%, #a88345 100%);
+      color: #111;
+      box-shadow: 0 12px 30px rgba(182,145,75,0.22);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.28); }
+
+    .hero {
+      padding: 76px 0 46px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 6.25rem);
+      line-height: 0.98;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+
+    h1 .gold { color: var(--gold); display: block; }
+
+    .hero h2 {
+      margin: 28px 0 16px;
+      font-size: clamp(1.35rem, 2.5vw, 2rem);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--text);
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.06rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .hero-card {
+      padding: 28px;
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      min-height: 430px;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -28% auto;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(182,145,75,0.18), transparent 62%);
+      filter: blur(10px);
+    }
+
+    .hero-panel {
+      height: 100%;
+      display: grid;
+      gap: 18px;
+      align-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-panel .mini {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .hero-panel .quote {
+      font-size: 1.5rem;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .hero-list {
+      display: grid;
+      gap: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--white-soft);
+    }
+
+    .hero-list div {
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .hero-logo {
+      width: 180px;
+      margin: 0 auto 8px;
+      opacity: 0.95;
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,0.35));
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      font-weight: 500;
+    }
+
+    .section-subtitle {
+      margin: 0 0 28px;
+      max-width: 760px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .about-box,
+    .cta-box {
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow);
+    }
+
+    .about-text {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.03rem;
+      line-height: 1.9;
+      color: var(--white-soft);
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .benefits-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(182,145,75,0.28);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      font-weight: 500;
+    }
+
+    .card p {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.98rem;
+    }
+
+    .benefit-card {
+      text-align: left;
+      min-height: 160px;
+    }
+
+    .project-tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.8rem;
+      color: var(--gold);
+      background: var(--gold-soft);
+      border: 1px solid rgba(182,145,75,0.2);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #111;
+    }
+
+    .cta-box {
+      display: grid;
+      gap: 18px;
+      align-items: center;
+      grid-template-columns: 1.25fr 0.75fr;
+      margin-top: 10px;
+    }
+
+    .cta-box p {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.02rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    footer {
+      padding: 30px 0 42px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 26px;
+    }
+
+    .footer-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .cta-box,
+      .services-grid,
+      .projects-grid,
+      .benefits-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-card { min-height: auto; }
+      .cta-actions { justify-content: flex-start; }
+    }
+
+    @media (max-width: 760px) {
+      .nav { min-height: 70px; }
+      .mobile-toggle { display: inline-flex; }
+      .menu {
+        position: absolute;
+        top: 72px;
+        left: 16px;
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 18px;
+        background: rgba(8,8,8,0.96);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+      }
+      .menu.open { display: flex; }
+
+      .hero,
+      section { padding: 28px 0; }
+
+      .hero-grid,
+      .services-grid,
+      .projects-grid,
+      .benefits-grid,
+      .cta-box {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions,
+      .cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn { width: 100%; }
+
+      .footer-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .project-image {
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#inicio">Felipe Correia <span>| Anim4LL</span></a>
+      <button class="mobile-toggle" id="mobileToggle">Menu</button>
+      <nav class="menu" id="menu">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato" class="btn btn-secondary">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="reveal visible">
+          <div class="eyebrow">Comunicação • Imagem • Estratégia</div>
+          <h1>Felipe Correia <span class="gold">| Anim4LL</span></h1>
+          <h2>Seu trabalho pode ser bom. Sua apresentação também precisa ser.</h2>
+          <p>
+            A Anim4LL ajuda marcas, profissionais e projetos a transmitirem mais valor,
+            mais profissionalismo e mais força através da comunicação visual, do
+            posicionamento e da apresentação estratégica.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://wa.me/5531933002072" target="_blank">Falar no WhatsApp</a>
+            <a class="btn btn-secondary" href="#projetos">Ver projetos</a>
+          </div>
+        </div>
+
+        <aside class="hero-card reveal">
+          <div class="hero-panel">
+            <div>
+              <img src="imagens/logomarca.png" alt="Logomarca Anim4LL" class="hero-logo">
+              <div class="mini">Presença com intenção</div>
+              <div class="quote">Criatividade, posicionamento e imagem trabalhando para que sua marca seja vista com mais força e percebida com mais valor.</div>
+            </div>
+            <div class="hero-list">
+              <div>Comunicação visual com leitura mais profissional</div>
+              <div>Apresentação estratégica para negócios, marcas e projetos</div>
+              <div>Direção criativa com linguagem forte e acessível</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container reveal">
+        <h2 class="section-title">Comunicação com intenção, imagem com valor.</h2>
+        <p class="section-subtitle">
+          Mais do que criar algo bonito, a proposta é construir uma presença visual
+          que ajude seu trabalho a ser percebido com clareza, força e profissionalismo.
+        </p>
+        <div class="about-box">
+          <div class="about-text">
+            Sou Felipe Correia, criador da Anim4LL. Atuo com comunicação, imagem,
+            posicionamento e apresentação visual para ajudar marcas, profissionais e
+            projetos a se mostrarem de forma mais forte, mais clara e mais convincente.
+            Meu foco é unir direção criativa, sensibilidade visual e intenção estratégica
+            para transformar ideias em materiais que valorizam a percepção do público e
+            fortalecem a presença de quem precisa crescer, vender melhor e se comunicar com mais impacto.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="container reveal">
+        <h2 class="section-title">Serviços</h2>
+        <p class="section-subtitle">
+          Soluções pensadas para fortalecer a forma como sua marca, seu serviço ou seu projeto se apresenta.
+        </p>
+        <div class="grid services-grid">
+          <article class="card">
+            <h3>Criação visual</h3>
+            <p>Artes, peças promocionais, materiais institucionais e composições visuais para valorizar sua apresentação.</p>
+          </article>
+          <article class="card">
+            <h3>Posicionamento de marca</h3>
+            <p>Ajustes de linguagem, imagem e direção para transmitir mais profissionalismo, coerência e valor percebido.</p>
+          </article>
+          <article class="card">
+            <h3>Conteúdo para redes sociais</h3>
+            <p>Materiais visuais com intenção estratégica para atrair atenção, reforçar presença e gerar conexão com o público.</p>
+          </article>
+          <article class="card">
+            <h3>Comunicação esportiva</h3>
+            <p>Soluções criativas para atletas, equipes, eventos, competições e projetos ligados ao esporte.</p>
+          </article>
+          <article class="card">
+            <h3>Portfólios e apresentações</h3>
+            <p>Estruturação visual para apresentar melhor serviços, trajetórias, propostas e marcas.</p>
+          </article>
+          <article class="card">
+            <h3>Valorização de imagem</h3>
+            <p>Tratamento e refinamento visual de materiais fotográficos para melhorar impacto, leitura e presença.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container reveal">
+        <h2 class="section-title">O que muda quando sua apresentação fica mais forte</h2>
+        <p class="section-subtitle">
+          Uma comunicação mais bem construída ajuda seu público a perceber melhor o valor do que você faz.
+        </p>
+        <div class="grid benefits-grid">
+          <article class="card benefit-card">
+            <h3>Mais profissionalismo</h3>
+            <p>Transmita mais preparo, mais seriedade e mais confiança logo no primeiro contato.</p>
+          </article>
+          <article class="card benefit-card">
+            <h3>Mais confiança</h3>
+            <p>Uma imagem mais forte ajuda o público a acreditar mais na qualidade do seu trabalho.</p>
+          </article>
+          <article class="card benefit-card">
+            <h3>Primeira impressão</h3>
+            <p>Cause impacto positivo logo no primeiro olhar e melhore a percepção da sua marca.</p>
+          </article>
+          <article class="card benefit-card">
+            <h3>Mais valor percebido</h3>
+            <p>Seu serviço deixa de parecer improvisado e passa a comunicar mais valor.</p>
+          </article>
+          <article class="card benefit-card">
+            <h3>Presença de marca</h3>
+            <p>Fortaleça sua presença visual e se diferencie com mais clareza no mercado.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <div class="container reveal">
+        <h2 class="section-title">Projetos e frentes criativas</h2>
+        <p class="section-subtitle">
+          A Anim4LL pode atuar em diferentes contextos, sempre com foco em força visual, clareza e percepção de valor.
+        </p>
+        <div class="grid projects-grid">
+          <article class="card">
+            <img src="imagens/projeto1.png" alt="Projeto 1" class="project-image">
+            <span class="project-tag">Negócios locais</span>
+            <h3>Projeto 1</h3>
+            <p>Substitua este texto por uma descrição curta do primeiro trabalho ou peça que deseja destacar.</p>
+          </article>
+
+          <article class="card">
+            <img src="imagens/projeto2.png" alt="Projeto 2" class="project-image">
+            <span class="project-tag">Comunicação</span>
+            <h3>Projeto 2</h3>
+            <p>Substitua este texto por uma descrição curta do segundo projeto, explicando o objetivo ou resultado visual.</p>
+          </article>
+
+          <article class="card">
+            <img src="imagens/projeto3.png" alt="Projeto 3" class="project-image">
+            <span class="project-tag">Imagem</span>
+            <h3>Projeto 3</h3>
+            <p>Substitua este texto por uma descrição curta do terceiro projeto com linguagem clara e comercial.</p>
+          </article>
+
+          <article class="card">
+            <img src="imagens/projeto4.png" alt="Projeto 4" class="project-image">
+            <span class="project-tag">Estratégia</span>
+            <h3>Projeto 4</h3>
+            <p>Substitua este texto por uma descrição curta do quarto projeto e mostre o tipo de solução que você entrega.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container reveal">
+        <div class="cta-box">
+          <div>
+            <h2 class="section-title">Sua imagem já está comunicando. A questão é: ela está valorizando você?</h2>
+            <p>
+              Se sua marca, seu serviço ou seu projeto merecem uma apresentação mais forte,
+              a Anim4LL pode ajudar a construir isso com mais clareza, mais presença e mais valor percebido.
+            </p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="https://wa.me/5531933002072" target="_blank">Vamos conversar</a>
+            <a class="btn btn-secondary" href="https://www.instagram.com/mktdigianimal/" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div>
+        <strong>Felipe Correia | Anim4LL</strong><br />
+        Comunicação, imagem e posicionamento estratégico para marcas, profissionais e projetos.
+      </div>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/mktdigianimal/" target="_blank">Instagram</a>
+        <a href="https://www.instagram.com/felipeaoc/" target="_blank">Perfil pessoal</a>
+        <a href="https://wa.me/5531933002072" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el, index) => {
+      if (!el.classList.contains('visible')) {
+        el.style.transitionDelay = `${index * 60}ms`;
+      }
+      observer.observe(el);
+    });
+
+    const mobileToggle = document.getElementById('mobileToggle');
+    const menu = document.getElementById('menu');
+
+    mobileToggle.addEventListener('click', () => {
+      menu.classList.toggle('open');
+    });
+
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => menu.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>
