@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anim4LL | Comunicação, imagem e estratégia</title>
+  <meta name="description" content="Anim4LL: comunicação, imagem e estratégia para valorizar sua presença. Branding, conteúdo, esporte, restauração fotográfica e apresentação profissional." />
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --panel: rgba(18, 20, 27, 0.9);
+      --panel-soft: rgba(255,255,255,0.035);
+      --text: #f3f4f6;
+      --muted: #b8beca;
+      --line: rgba(255,255,255,0.08);
+      --accent: #d4af37;
+      --success: #15b36c;
+      --danger: #d64545;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --container: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(212,175,55,0.12), transparent 22%),
+        radial-gradient(circle at left center, rgba(212,175,55,0.07), transparent 18%),
+        linear-gradient(180deg, #090a0d 0%, #0d0f14 42%, #0b0c10 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(calc(100% - 32px), var(--container)); margin: 0 auto; }
+    .section { padding: 72px 0; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(8, 9, 12, 0.8);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .topbar-inner {
+      min-height: 72px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .brand { display: flex; flex-direction: column; gap: 2px; }
+    .brand strong { font-size: 1.08rem; letter-spacing: 0.03em; }
+    .brand span, .muted { color: var(--muted); }
+    .brand span { font-size: 0.86rem; }
+    .nav { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+    .nav a { color: var(--muted); font-size: 0.95rem; transition: color .2s ease; }
+    .nav a:hover { color: var(--text); }
+    .nav-cta {
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(212,175,55,0.25);
+      background: rgba(212,175,55,0.1);
+      color: var(--text) !important; padding: 10px 14px; border-radius: 999px; font-weight: 700;
+    }
+
+    .hero { padding: 48px 0 18px; }
+    .hero-grid, .cards-3, .service-grid, .portfolio-grid, .steps-grid, .form-grid, .briefing-layout, .hero-mini-grid {
+      display: grid; gap: 18px;
+    }
+    .hero-grid { grid-template-columns: 1.12fr 0.88fr; }
+    .cards-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .service-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .portfolio-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .steps-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .form-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .briefing-layout { grid-template-columns: 1.1fr 0.9fr; }
+    .hero-mini-grid { grid-template-columns: repeat(3, 1fr); margin-top: 22px; }
+
+    .card, .hero-card, .service-card, .portfolio-card, .step-card, .section-card, .submit-panel, .info-card, .notice {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      backdrop-filter: blur(14px);
+      overflow: hidden;
+    }
+    .card, .hero-card, .service-card, .portfolio-card, .step-card, .section-card, .submit-panel, .info-card { padding: 28px; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px;
+      border: 1px solid rgba(212,175,55,0.28); border-radius: 999px;
+      background: rgba(255,255,255,0.04); color: var(--accent); font-weight: 700; font-size: .92rem;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.02; margin: 16px 0 14px; letter-spacing: -0.05em;
+    }
+    h2 { font-size: clamp(1.55rem, 3vw, 2.3rem); line-height: 1.08; margin: 0 0 12px; letter-spacing: -0.03em; }
+    .hero-lead, .section-intro, .mini-note, .card p, .service-card p, .portfolio-card p, .step-card p, .info-card p, .hero-mini span, .stat span { color: var(--muted); }
+    .hero-lead { max-width: 64ch; font-size: 1.06rem; }
+    .section-head { max-width: 760px; margin-bottom: 26px; }
+    .section-kicker {
+      display: inline-block; margin-bottom: 12px; color: var(--accent); font-weight: 800; letter-spacing: .05em;
+      text-transform: uppercase; font-size: .8rem;
+    }
+
+    .hero-actions, .actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .hero-actions { margin-top: 26px; }
+
+    .btn, button {
+      appearance: none; border: none; border-radius: 16px; padding: 16px 22px; font: inherit; font-weight: 800; cursor: pointer;
+      transition: transform .2s ease, filter .2s ease, background .2s ease; text-align: center;
+    }
+    .btn-primary, button {
+      background: linear-gradient(180deg, #e1bf57 0%, #bb9530 100%); color: #141414;
+      box-shadow: 0 14px 30px rgba(212,175,55,0.18);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: var(--text);
+    }
+    .btn:hover, button:hover { transform: translateY(-1px); filter: brightness(1.02); }
+    button:disabled { cursor: wait; opacity: 0.78; }
+
+    .hero-mini, .stat, .info-list li {
+      padding: 14px; border-radius: var(--radius-sm); background: var(--panel-soft); border: 1px solid rgba(255,255,255,0.05);
+    }
+    .hero-mini strong, .service-card strong, .portfolio-card strong, .step-card strong, .info-list li strong { display: block; margin-bottom: 6px; }
+    .stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-top: 18px; }
+    .stat b { display: block; font-size: 1.28rem; margin-bottom: 5px; color: var(--accent); }
+    .service-index, .step-index, .section-number {
+      width: 42px; height: 42px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(212,175,55,0.12); color: var(--accent); font-weight: 800; border: 1px solid rgba(212,175,55,0.18); margin-bottom: 14px;
+    }
+    .section-number { width: 44px; height: 44px; border-radius: 14px; margin-bottom: 0; flex-shrink: 0; }
+    .cta-band {
+      padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+    }
+    .cta-band p { margin: 0; color: var(--muted); max-width: 58ch; }
+
+    .hero-visual {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 18px;
+      align-self: stretch;
+    }
+    .logo-panel {
+      padding: 0;
+      overflow: hidden;
+    }
+    .logo-panel img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      object-position: center;
+    }
+    .featured-panel {
+      padding: 0;
+      position: relative;
+      min-height: 420px;
+    }
+    .featured-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(1.02) contrast(1.02);
+    }
+    .featured-overlay {
+      position: absolute;
+      inset: auto 18px 18px 18px;
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(7,7,9,0.08), rgba(7,7,9,0.88));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .featured-overlay strong { display: block; margin-bottom: 6px; }
+    .featured-overlay span { color: var(--muted); font-size: .95rem; }
+
+    .portfolio-card { padding: 0; }
+    .portfolio-thumb {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #0d0f14;
+    }
+    .portfolio-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .portfolio-content {
+      padding: 24px 24px 26px;
+    }
+
+    .briefing-header { margin-bottom: 24px; }
+    .info-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    form { display: grid; gap: 20px; }
+    .briefing-section-head { display: flex; gap: 14px; align-items: start; margin-bottom: 22px; }
+    .briefing-section-head h3, .info-card h3, .submit-panel h3 { margin: 0 0 6px; font-size: 1.28rem; }
+    .field, .field-full { display: flex; flex-direction: column; gap: 8px; }
+    .field-full { grid-column: 1 / -1; }
+    label { font-weight: 650; font-size: 0.96rem; color: #f7f7f8; }
+    input, select, textarea {
+      width: 100%; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; background: rgba(255,255,255,0.04);
+      color: var(--text); padding: 15px 16px; font: inherit; outline: none; transition: border-color .2s ease, background .2s ease, transform .2s ease;
+    }
+    input::placeholder, textarea::placeholder { color: #8d94a1; }
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(212,175,55,0.65); background: rgba(255,255,255,0.055); transform: translateY(-1px);
+    }
+    textarea { min-height: 140px; resize: vertical; }
+
+    .chips, .check-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .check-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .chip, .check-item { position: relative; }
+    .chip input, .check-item input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .chip span, .check-item span {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 48px; width: 100%; padding: 12px 14px;
+      border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); color: var(--muted);
+      transition: border-color .2s ease, background .2s ease, color .2s ease; text-align: center; font-size: .94rem;
+    }
+    .chip input:checked + span, .check-item input:checked + span {
+      border-color: rgba(212,175,55,0.58); background: rgba(212,175,55,0.11); color: var(--text);
+    }
+
+    .notice { padding: 16px 18px; display: none; font-weight: 600; margin-bottom: 20px; }
+    .notice.show { display: block; }
+    .notice.success { border-color: rgba(21,179,108,0.28); background: rgba(21,179,108,0.08); color: #bbf4d7; }
+    .notice.error { border-color: rgba(214,69,69,0.26); background: rgba(214,69,69,0.08); color: #ffcccc; }
+
+    .required::after { content: " *"; color: var(--accent); }
+    .footer { padding: 36px 0 42px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 32px; }
+    .footer-wrap { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; }
+    .footer p { margin: 0; color: #8d94a1; font-size: .92rem; }
+    code { background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 8px; }
+
+
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 18px;
+      border-radius: 999px;
+      background: #25d366;
+      color: #111;
+      font-weight: 800;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .whatsapp-float:hover { transform: translateY(-1px); filter: brightness(1.02); }
+
+    @media (max-width: 1080px) {
+      .hero-grid, .cards-3, .service-grid, .portfolio-grid, .steps-grid, .form-grid, .briefing-layout, .hero-mini-grid, .check-grid, .cta-band { grid-template-columns: 1fr; }
+      .hero-visual { grid-template-rows: auto auto; }
+      .featured-panel { min-height: 340px; }
+    }
+    @media (max-width: 820px) {
+      .topbar-inner, .footer-wrap { flex-direction: column; align-items: flex-start; }
+      .nav { gap: 12px; }
+    }
+    @media (max-width: 680px) {
+      .container { width: min(calc(100% - 20px), var(--container)); }
+      .card, .hero-card, .service-card, .portfolio-content, .step-card, .section-card, .submit-panel, .info-card { padding: 22px; }
+      .hero { padding-top: 34px; }
+      .btn, button, .nav-cta { width: 100%; }
+      .actions { align-items: stretch; }
+      .logo-panel img { height: 120px; }
+      .featured-panel { min-height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <strong>Anim4LL</strong>
+        <span>Comunicação, imagem e estratégia</span>
+      </div>
+      <nav class="nav">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#processo">Processo</a>
+        <a href="#contato">Contato</a>
+        <a href="#briefing" class="nav-cta">Fazer briefing</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="badge">Anim4LL • Baixo custo. Alta presença.</div>
+          <h1>Seu trabalho pode ser bom. Sua apresentação também precisa ser.</h1>
+          <p class="hero-lead">
+            Comunicação, imagem e estratégia para valorizar sua presença. A Anim4LL ajuda marcas,
+            profissionais e projetos a parecerem tão bons quanto realmente são.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#briefing">Quero preencher o briefing</a>
+            <a class="btn btn-secondary" href="#portfolio">Ver portfólio</a>
+          </div>
+          <div class="hero-mini-grid">
+            <div class="hero-mini">
+              <strong>Visual com direção</strong>
+              <span>Peças, páginas e materiais pensados para apresentar melhor e vender com mais força.</span>
+            </div>
+            <div class="hero-mini">
+              <strong>Estética com estratégia</strong>
+              <span>O objetivo não é só ficar bonito — é criar presença, clareza e valor percebido.</span>
+            </div>
+            <div class="hero-mini">
+              <strong>Linguagem acessível</strong>
+              <span>Visual premium sem cara de agência distante, pensado para pequenos negócios e projetos reais.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="logo-panel card">
+            <img src="imagens/logomarca.png" alt="Logomarca Anim4LL" />
+          </div>
+          <div class="featured-panel card">
+            <img src="imagens/projeto2.png" alt="Comunicação esportiva premium" />
+            <div class="featured-overlay">
+              <strong>Comunicação esportiva com presença</strong>
+              <span>Projetos para atletas, equipes, eventos e marcas que precisam de energia, imagem forte e valor percebido.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sobre">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Sobre</span>
+          <h2>Uma marca criativa com visão comercial</h2>
+          <p class="section-intro">
+            A Anim4LL une comunicação, imagem e direção estratégica para fazer marcas pequenas parecerem maiores,
+            mais confiáveis e mais valiosas. Não é só fazer arte. É melhorar a forma como o seu trabalho aparece,
+            aumentar percepção, clareza e presença.
+          </p>
+        </div>
+        <div class="cards-3">
+          <div class="card">
+            <strong>Presença</strong>
+            <p>Peças e materiais que elevam a aparência do serviço e ajudam a cobrar melhor pelo que é entregue.</p>
+          </div>
+          <div class="card">
+            <strong>Conceito</strong>
+            <p>Campanhas com identidade própria, não só layout bonito ou montagem genérica.</p>
+          </div>
+          <div class="card">
+            <strong>Memória</strong>
+            <p>Marca, mascotes, linguagem e visual pensados para serem lembrados depois do primeiro impacto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="para-quem-e">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Para quem é</span>
+          <h2>A Anim4LL faz mais sentido para quem precisa parecer melhor sem complicar o processo</h2>
+          <p class="section-intro">
+            Soluções pensadas para negócios e projetos reais que precisam ganhar presença, clareza e valor percebido no digital.
+          </p>
+        </div>
+        <div class="cards-3">
+          <div class="card">
+            <strong>Pequenos negócios</strong>
+            <p>Para quem precisa vender melhor, comunicar com mais clareza e parecer mais organizado online.</p>
+          </div>
+          <div class="card">
+            <strong>Profissionais autônomos</strong>
+            <p>Para quem quer se apresentar com mais força, confiança e valor sem depender de visual genérico.</p>
+          </div>
+          <div class="card">
+            <strong>Projetos esportivos</strong>
+            <p>Para atletas, equipes, eventos e iniciativas que precisam de energia, identidade e presença institucional.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicos">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Serviços</span>
+          <h2>O que a Anim4LL pode entregar para sua marca</h2>
+          <p class="section-intro">
+            Soluções pensadas para melhorar percepção, presença e comunicação visual. Tudo com foco em utilidade,
+            valor percebido e clareza comercial.
+          </p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="service-index">01</div>
+            <strong>Apresentação de marca</strong>
+            <p>Identidade visual aplicada, direção criativa, posicionamento e materiais para parecer mais profissional e confiável.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-index">02</div>
+            <strong>Conteúdo comercial</strong>
+            <p>Posts, campanhas, peças de oferta, sazonais e materiais de divulgação com foco em clareza, impacto e contato.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-index">03</div>
+            <strong>Conteúdo para redes sociais</strong>
+            <p>Visuais para feed, stories, destaques, capas e presença digital mais organizada e coerente.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-index">04</div>
+            <strong>Comunicação esportiva</strong>
+            <p>Peças para equipes, atletas, eventos, campeonatos e projetos com energia competitiva e cara institucional.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-index">05</div>
+            <strong>Restauração de fotos</strong>
+            <p>Recuperação fiel de imagens antigas, danificadas ou com baixa qualidade, com respeito à identidade real.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-index">06</div>
+            <strong>Materiais comerciais e digitais</strong>
+            <p>Portfólios, apresentações, páginas, PDFs, catálogos e apoio visual para vender, apresentar e posicionar melhor.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="diferenciais">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Diferenciais</span>
+          <h2>Por que esse trabalho chama atenção rápido</h2>
+          <p class="section-intro">
+            Não é só fazer arte bonita — é organizar percepção, valor e mensagem. O visual precisa chamar atenção,
+            ser útil e reforçar a força do que você entrega.
+          </p>
+        </div>
+        <div class="cards-3">
+          <div class="card">
+            <strong>Fidelidade visual</strong>
+            <p>Na restauração fotográfica, o cuidado é recuperar sem inventar. Preservamos identidade, feições e memória.</p>
+          </div>
+          <div class="card">
+            <strong>Estética com estratégia</strong>
+            <p>O visual premium ajuda a posicionar melhor o negócio e aumenta a confiança de quem vê.</p>
+          </div>
+          <div class="card">
+            <strong>Nicho esportivo forte</strong>
+            <p>Projetos esportivos ganham força, disputa e presença institucional sem perder clareza comercial.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Portfólio</span>
+          <h2>Projetos que representam bem a Anim4LL</h2>
+          <p class="section-intro">
+            Uma mistura de identidade, força visual e aplicação prática. Peças que não só ficam bonitas,
+            mas criam lembrança, autoridade e vontade de entrar em contato.
+          </p>
+        </div>
+        <div class="portfolio-grid">
+          <article class="portfolio-card">
+            <div class="portfolio-thumb"><img src="imagens/projeto1.png" alt="Projeto de presença digital premium" /></div>
+            <div class="portfolio-content">
+              <strong>Presença digital e posicionamento</strong>
+              <p>Visual comercial sofisticado para marcas que querem parecer mais organizadas, confiáveis e valiosas no digital.</p>
+            </div>
+          </article>
+          <article class="portfolio-card">
+            <div class="portfolio-thumb"><img src="imagens/projeto2.png" alt="Projeto esportivo premium" /></div>
+            <div class="portfolio-content">
+              <strong>Comunicação esportiva premium</strong>
+              <p>Estética forte, dramática e institucional para atletas, projetos esportivos, eventos e campanhas com energia competitiva.</p>
+            </div>
+          </article>
+          <article class="portfolio-card">
+            <div class="portfolio-thumb"><img src="imagens/projeto3.png" alt="Projeto visual de produto premium" /></div>
+            <div class="portfolio-content">
+              <strong>Produto, embalagem e apresentação</strong>
+              <p>Direção visual elegante para produtos, kits, vitrines, presentes e marcas que dependem de valor percebido imediato.</p>
+            </div>
+          </article>
+          <article class="portfolio-card">
+            <div class="portfolio-thumb"><img src="imagens/projeto4.png" alt="Projeto de tratamento e refinamento de imagem" /></div>
+            <div class="portfolio-content">
+              <strong>Tratamento e refinamento de imagem</strong>
+              <p>Retoque, apresentação visual e acabamento premium para destacar retratos, materiais de divulgação e peças de portfólio.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="processo">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Processo</span>
+          <h2>Como funciona a contratação</h2>
+          <p class="section-intro">
+            Processo simples para entender a necessidade e transformar em material pronto para usar, apresentar ou vender.
+          </p>
+        </div>
+        <div class="steps-grid">
+          <article class="step-card">
+            <div class="step-index">1</div>
+            <strong>Briefing rápido</strong>
+            <p>Entendimento do objetivo, público e formato do material.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-index">2</div>
+            <strong>Direção visual</strong>
+            <p>Definição do caminho estético e da proposta mais adequada.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-index">3</div>
+            <strong>Produção</strong>
+            <p>Criação, refinamento e organização das peças ou arquivos.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-index">4</div>
+            <strong>Entrega</strong>
+            <p>Material final pronto para apresentar, publicar ou vender.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card cta-band">
+          <div>
+            <h2>Se a ideia é parecer mais profissional, vender melhor e apresentar seu trabalho com mais força, a Anim4LL pode montar a solução certa.</h2>
+            <p>O próximo passo é preencher o briefing para organizar melhor sua marca, seu público, seus objetivos e o tipo de comunicação que faz mais sentido para o seu projeto.</p>
+          </div>
+          <a class="btn btn-primary" href="#briefing">Começar briefing</a>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Contato</span>
+          <h2>Fale com a Anim4LL do jeito que for melhor para você</h2>
+          <p class="section-intro">
+            Você pode preencher o briefing para organizar seu projeto com mais detalhe ou seguir por um canal direto de contato.
+            Se preferir acessar tudo em um só lugar, a central de links da Anim4LL reúne os principais caminhos.
+          </p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="service-index">01</div>
+            <strong>WhatsApp</strong>
+            <p>Atendimento direto para tirar dúvidas, pedir orçamento ou iniciar seu projeto com mais rapidez.</p>
+            <div class="actions">
+              <a class="btn btn-secondary" href="https://wa.me/5531933002072" target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a>
+            </div>
+          </article>
+          <article class="service-card">
+            <div class="service-index">02</div>
+            <strong>Instagram profissional</strong>
+            <p>Acompanhe trabalhos, atualizações e a identidade visual da Anim4LL no Instagram.</p>
+            <div class="actions">
+              <a class="btn btn-secondary" href="https://www.instagram.com/4nim4ll/" target="_blank" rel="noopener noreferrer">@4nim4ll</a>
+            </div>
+          </article>
+          <article class="service-card">
+            <div class="service-index">03</div>
+            <strong>LinkedIn</strong>
+            <p>Veja o perfil profissional da Anim4LL e sua presença institucional em um canal mais corporativo.</p>
+            <div class="actions">
+              <a class="btn btn-secondary" href="https://www.linkedin.com/in/4ll/" target="_blank" rel="noopener noreferrer">linkedin.com/in/4ll</a>
+            </div>
+          </article>
+          <article class="service-card">
+            <div class="service-index">04</div>
+            <strong>Facebook</strong>
+            <p>Mais um canal para acompanhar a marca, conteúdos e materiais publicados pela Anim4LL.</p>
+            <div class="actions">
+              <a class="btn btn-secondary" href="https://www.facebook.com/Anim4LL" target="_blank" rel="noopener noreferrer">facebook.com/Anim4LL</a>
+            </div>
+          </article>
+          <article class="service-card">
+            <div class="service-index">05</div>
+            <strong>Central de links</strong>
+            <p>Acesse todos os canais principais da Anim4LL em um só lugar pela página bio.site/4ll.</p>
+            <div class="actions">
+              <a class="btn btn-secondary" href="https://bio.site/4ll" target="_blank" rel="noopener noreferrer">bio.site/4ll</a>
+            </div>
+          </article>
+          <article class="service-card">
+            <div class="service-index">06</div>
+            <strong>Briefing</strong>
+            <p>Prefere explicar tudo com calma? Preencha o briefing abaixo para organizar melhor seu projeto.</p>
+            <div class="actions">
+              <a class="btn btn-secondary" href="#briefing">Ir para o briefing</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="briefing">
+      <div class="container">
+        <div class="briefing-header section-head">
+          <span class="section-kicker">Briefing</span>
+          <h2>Briefing de Marca e Comunicação</h2>
+          <p class="section-intro">
+            Preencha as informações abaixo para que possamos entender melhor seu negócio, sua identidade,
+            seus objetivos e o que precisa ser construído visualmente e estrategicamente.
+          </p>
+        </div>
+
+        <div class="briefing-layout">
+          <div class="hero-card">
+            <div class="badge">Etapa final da página</div>
+            <h2>Quanto mais completo, mais alinhado tende a ser o projeto.</h2>
+            <p class="section-intro">
+              Este briefing foi criado para ajudar a Anim4LL a compreender melhor sua marca,
+              seu público, sua forma de comunicar e a direção mais adequada para o seu projeto.
+            </p>
+            <div class="hero-mini-grid">
+              <div class="hero-mini">
+                <strong>Mais clareza</strong>
+                <span>Ajuda a organizar sua marca, sua comunicação e o rumo do projeto.</span>
+              </div>
+              <div class="hero-mini">
+                <strong>Mais alinhamento</strong>
+                <span>Reduz ruído e facilita decisões importantes desde o início.</span>
+              </div>
+              <div class="hero-mini">
+                <strong>Mais eficiência</strong>
+                <span>Deixa a entrega mais coerente, profissional e objetiva.</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="info-card">
+            <h3>Antes de enviar</h3>
+            <p>Use este formulário para explicar de forma simples como sua marca deve parecer, falar e se posicionar.</p>
+            <ul class="info-list">
+              <li>
+                <strong>Leva poucos minutos</strong>
+                Quanto mais completo estiver, melhor tende a ser a leitura estratégica do projeto.
+              </li>
+              <li>
+                <strong>Blocos organizados</strong>
+                Você vai preencher dados, posicionamento, público, estilo visual, materiais e objetivo.
+              </li>
+              <li>
+                <strong>Feito para orientar</strong>
+                O briefing ajuda a transformar uma ideia solta em direção mais clara e aproveitável.
+              </li>
+            </ul>
+          </aside>
+        </div>
+
+        <div id="formNotice" class="notice" role="alert" aria-live="polite"></div>
+
+        <form id="briefingForm" novalidate>
+          <section class="section-card">
+            <div class="briefing-section-head">
+              <div class="section-number">1</div>
+              <div>
+                <h3>Dados principais</h3>
+                <p class="muted">Informações básicas para identificação e contato.</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="field"><label class="required" for="empresa">Nome da empresa ou profissional</label><input id="empresa" name="empresa" type="text" placeholder="Ex.: Studio Exemplo" required /></div>
+              <div class="field"><label class="required" for="responsavel">Nome do responsável</label><input id="responsavel" name="responsavel" type="text" placeholder="Seu nome" required /></div>
+              <div class="field"><label class="required" for="whatsapp">WhatsApp</label><input id="whatsapp" name="whatsapp" type="tel" placeholder="(31) 90000-0000" required /></div>
+              <div class="field"><label class="required" for="email">E-mail</label><input id="email" name="email" type="email" placeholder="voce@exemplo.com" required /></div>
+              <div class="field"><label for="cidade">Cidade e estado</label><input id="cidade" name="cidade" type="text" placeholder="Betim, MG" /></div>
+              <div class="field"><label for="site">Site</label><input id="site" name="site" type="url" placeholder="https://" /></div>
+              <div class="field"><label for="instagram">Instagram</label><input id="instagram" name="instagram" type="text" placeholder="@seuperfil" /></div>
+              <div class="field"><label for="redes">Outras redes sociais</label><input id="redes" name="redes" type="text" placeholder="Facebook, TikTok, LinkedIn..." /></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">2</div><div><h3>Sobre o negócio</h3><p class="muted">O que você faz, como trabalha e como deseja ser percebido.</p></div></div>
+            <div class="form-grid">
+              <div class="field-full"><label class="required" for="oQueFaz">O que você faz?</label><textarea id="oQueFaz" name="oQueFaz" placeholder="Explique seu trabalho de forma simples e objetiva." required></textarea></div>
+              <div class="field-full"><label for="servicos">Quais produtos ou serviços oferece?</label><textarea id="servicos" name="servicos" placeholder="Liste seus principais serviços ou produtos."></textarea></div>
+              <div class="field"><label for="tempoAtuacao">Há quanto tempo atua?</label><input id="tempoAtuacao" name="tempoAtuacao" type="text" placeholder="Ex.: 3 anos" /></div>
+              <div class="field"><label for="diferencial">Qual é o principal diferencial do seu trabalho?</label><input id="diferencial" name="diferencial" type="text" placeholder="O que faz seu trabalho se destacar?" /></div>
+              <div class="field-full"><label for="percepcaoMarca">Como você gostaria que sua marca fosse percebida?</label><textarea id="percepcaoMarca" name="percepcaoMarca" placeholder="Ex.: profissional, confiável, humana, premium, acessível..."></textarea></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">3</div><div><h3>Objetivo</h3><p class="muted">O que você quer resolver e quais resultados espera alcançar.</p></div></div>
+            <div class="form-grid">
+              <div class="field-full"><label for="melhorarHoje">O que você quer melhorar hoje?</label><textarea id="melhorarHoje" name="melhorarHoje" placeholder="O que mais precisa evoluir agora?"></textarea></div>
+              <div class="field-full"><label for="dificuldade">Qual é sua maior dificuldade com comunicação, imagem ou presença digital?</label><textarea id="dificuldade" name="dificuldade" placeholder="Fale da principal dor que você sente hoje."></textarea></div>
+              <div class="field-full"><label for="precisaAgora">O que você precisa neste momento?</label><textarea id="precisaAgora" name="precisaAgora" placeholder="Ex.: identidade visual, peças, posicionamento, site, social media..."></textarea></div>
+              <div class="field-full"><label for="resultadoEsperado">Qual resultado espera alcançar?</label><textarea id="resultadoEsperado" name="resultadoEsperado" placeholder="Ex.: passar mais confiança, vender melhor, parecer mais profissional..."></textarea></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">4</div><div><h3>Público</h3><p class="muted">Quem você quer atingir e o que faz esse público confiar.</p></div></div>
+            <div class="form-grid">
+              <div class="field-full"><label for="clienteIdeal">Quem é seu cliente ideal?</label><textarea id="clienteIdeal" name="clienteIdeal" placeholder="Descreva a pessoa ou empresa que você mais quer atender."></textarea></div>
+              <div class="field-full"><label for="querVender">Para quem você mais quer vender?</label><textarea id="querVender" name="querVender" placeholder="Descreva o público mais importante neste momento."></textarea></div>
+              <div class="field-full"><label for="valoriza">O que esse público valoriza?</label><textarea id="valoriza" name="valoriza" placeholder="Preço, confiança, rapidez, estética, atendimento, exclusividade..."></textarea></div>
+              <div class="field-full"><label for="confianca">O que faz esse público confiar em uma marca como a sua?</label><textarea id="confianca" name="confianca" placeholder="Explique os sinais de confiança mais importantes para esse público."></textarea></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">5</div><div><h3>Posicionamento</h3><p class="muted">Como sua marca deve soar, parecer e se apresentar.</p></div></div>
+            <div class="form-grid">
+              <div class="field-full"><label for="marcaParecer">Como sua marca deve parecer?</label><textarea id="marcaParecer" name="marcaParecer" placeholder="Descreva a imagem que sua marca deve transmitir."></textarea></div>
+              <div class="field"><label for="palavrasCombinam">Quais palavras combinam com sua marca?</label><input id="palavrasCombinam" name="palavrasCombinam" type="text" placeholder="Ex.: forte, próxima, confiável..." /></div>
+              <div class="field"><label for="palavrasNao">Quais palavras não combinam?</label><input id="palavrasNao" name="palavrasNao" type="text" placeholder="Ex.: fria, genérica, exagerada..." /></div>
+              <div class="field-full"><label>Sua comunicação deve transmitir mais:</label><div class="chips"><label class="chip"><input type="checkbox" name="transmite" value="Popular" /><span>Popular</span></label><label class="chip"><input type="checkbox" name="transmite" value="Profissional" /><span>Profissional</span></label><label class="chip"><input type="checkbox" name="transmite" value="Premium" /><span>Premium</span></label><label class="chip"><input type="checkbox" name="transmite" value="Acessível" /><span>Acessível</span></label><label class="chip"><input type="checkbox" name="transmite" value="Moderna" /><span>Moderna</span></label><label class="chip"><input type="checkbox" name="transmite" value="Tradicional" /><span>Tradicional</span></label><label class="chip"><input type="checkbox" name="transmite" value="Técnica" /><span>Técnica</span></label><label class="chip"><input type="checkbox" name="transmite" value="Humana" /><span>Humana</span></label></div></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">6</div><div><h3>Estilo visual</h3><p class="muted">Elementos visuais já existentes e referências que ajudam no projeto.</p></div></div>
+            <div class="form-grid">
+              <div class="field"><label for="temLogo">Você já tem logomarca?</label><select id="temLogo" name="temLogo"><option value="">Selecione</option><option>Sim</option><option>Não</option><option>Tenho, mas precisa melhorar</option></select></div>
+              <div class="field"><label for="temCores">Já possui cores definidas?</label><select id="temCores" name="temCores"><option value="">Selecione</option><option>Sim</option><option>Não</option><option>Tenho uma base, mas não está fechada</option></select></div>
+              <div class="field-full"><label for="identidadeVisual">Já possui identidade visual?</label><textarea id="identidadeVisual" name="identidadeVisual" placeholder="Conte o que já existe e o que ainda falta organizar."></textarea></div>
+              <div class="field-full"><label for="gostaVisual">O que você gosta visualmente?</label><textarea id="gostaVisual" name="gostaVisual" placeholder="Ex.: clean, forte, sofisticado, popular, técnico, humano..."></textarea></div>
+              <div class="field-full"><label for="naoGostaVisual">O que você não gosta visualmente?</label><textarea id="naoGostaVisual" name="naoGostaVisual" placeholder="Ex.: cores fortes demais, excesso de informação, visual muito infantil..."></textarea></div>
+              <div class="field-full"><label for="referencias">Tem referências de marcas, perfis, sites ou artes?</label><textarea id="referencias" name="referencias" placeholder="Cole links ou descreva referências que você gosta."></textarea></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">7</div><div><h3>Comunicação</h3><p class="muted">Tom de voz, estilo de texto e mensagens que devem ou não aparecer.</p></div></div>
+            <div class="form-grid">
+              <div class="field-full"><label>Sua comunicação deve ser mais:</label><div class="check-grid"><label class="check-item"><input type="checkbox" name="tomComunicacao" value="Direta" /><span>Direta</span></label><label class="check-item"><input type="checkbox" name="tomComunicacao" value="Acolhedora" /><span>Acolhedora</span></label><label class="check-item"><input type="checkbox" name="tomComunicacao" value="Técnica" /><span>Técnica</span></label><label class="check-item"><input type="checkbox" name="tomComunicacao" value="Comercial" /><span>Comercial</span></label><label class="check-item"><input type="checkbox" name="tomComunicacao" value="Inspiradora" /><span>Inspiradora</span></label></div></div>
+              <div class="field"><label for="textos">Prefere textos mais curtos ou mais explicativos?</label><select id="textos" name="textos"><option value="">Selecione</option><option>Mais curtos</option><option>Mais explicativos</option><option>Equilíbrio entre os dois</option></select></div>
+              <div class="field"><label for="frase">Existe alguma frase, slogan ou mensagem que gostaria de usar?</label><input id="frase" name="frase" type="text" placeholder="Se tiver, escreva aqui" /></div>
+              <div class="field-full"><label for="naoQuer">Existe algo que não quer que apareça na comunicação?</label><textarea id="naoQuer" name="naoQuer" placeholder="Palavras, estilos, abordagens ou promessas que não combinam com sua marca."></textarea></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">8</div><div><h3>Materiais disponíveis</h3><p class="muted">O que já existe hoje para apoiar a construção do projeto.</p></div></div>
+            <div class="form-grid">
+              <div class="field"><label for="temFotos">Você já tem fotos próprias?</label><select id="temFotos" name="temFotos"><option value="">Selecione</option><option>Sim</option><option>Não</option><option>Tenho poucas</option></select></div>
+              <div class="field"><label for="temVideos">Tem vídeos?</label><select id="temVideos" name="temVideos"><option value="">Selecione</option><option>Sim</option><option>Não</option><option>Tenho poucos</option></select></div>
+              <div class="field"><label for="logoQualidade">Tem logotipo em boa qualidade?</label><select id="logoQualidade" name="logoQualidade"><option value="">Selecione</option><option>Sim</option><option>Não</option><option>Tenho, mas precisa melhorar</option></select></div>
+              <div class="field"><label for="portfolio">Tem portfólio, catálogo, cardápio ou tabela?</label><select id="portfolio" name="portfolio"><option value="">Selecione</option><option>Sim</option><option>Não</option><option>Tenho parte disso</option></select></div>
+              <div class="field-full"><label for="depoimentos">Tem depoimentos de clientes?</label><textarea id="depoimentos" name="depoimentos" placeholder="Se tiver, conte quais e onde eles estão."></textarea></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">9</div><div><h3>Aplicação</h3><p class="muted">Onde essa comunicação vai aparecer e o que é prioridade agora.</p></div></div>
+            <div class="form-grid">
+              <div class="field-full"><label>Onde esse projeto será usado?</label><div class="check-grid"><label class="check-item"><input type="checkbox" name="aplicacao" value="Instagram" /><span>Instagram</span></label><label class="check-item"><input type="checkbox" name="aplicacao" value="Facebook" /><span>Facebook</span></label><label class="check-item"><input type="checkbox" name="aplicacao" value="WhatsApp" /><span>WhatsApp</span></label><label class="check-item"><input type="checkbox" name="aplicacao" value="Site" /><span>Site</span></label><label class="check-item"><input type="checkbox" name="aplicacao" value="Anúncios" /><span>Anúncios</span></label><label class="check-item"><input type="checkbox" name="aplicacao" value="Apresentação" /><span>Apresentação</span></label><label class="check-item"><input type="checkbox" name="aplicacao" value="Impresso" /><span>Impresso</span></label></div></div>
+              <div class="field-full"><label for="prioridade">Qual é a prioridade hoje?</label><textarea id="prioridade" name="prioridade" placeholder="O que mais precisa sair primeiro?"></textarea></div>
+              <div class="field"><label for="urgencia">Existe urgência?</label><select id="urgencia" name="urgencia"><option value="">Selecione</option><option>Não</option><option>Sim, baixa</option><option>Sim, média</option><option>Sim, alta</option></select></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">10</div><div><h3>Comercial</h3><p class="muted">Faixa de investimento, formato de trabalho e prazo desejado.</p></div></div>
+            <div class="form-grid">
+              <div class="field"><label for="investimento">Qual faixa de investimento você imagina?</label><input id="investimento" name="investimento" type="text" placeholder="Ex.: até R$ 500, R$ 1.000 a R$ 2.000..." /></div>
+              <div class="field"><label for="tipoProjeto">Busca algo pontual ou contínuo?</label><select id="tipoProjeto" name="tipoProjeto"><option value="">Selecione</option><option>Pontual</option><option>Contínuo</option><option>Ainda não sei</option></select></div>
+              <div class="field-full"><label for="prazo">Tem prazo ideal?</label><textarea id="prazo" name="prazo" placeholder="Ex.: ainda este mês, até determinada data, sem urgência..."></textarea></div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">11</div><div><h3>Campo aberto</h3><p class="muted">O que ainda não foi perguntado, mas você considera importante.</p></div></div>
+            <div class="form-grid"><div class="field-full"><label for="campoAberto">Conte aqui tudo o que considera importante e ainda não foi perguntado.</label><textarea id="campoAberto" name="campoAberto" placeholder="Use este espaço livre para complementar o briefing."></textarea></div></div>
+          </section>
+
+          <section class="section-card">
+            <div class="briefing-section-head"><div class="section-number">12</div><div><h3>Pergunta final estratégica</h3><p class="muted">Uma resposta que ajuda muito a captar a essência da marca.</p></div></div>
+            <div class="form-grid"><div class="field-full"><label for="marcaPessoa">Se sua marca fosse uma pessoa, como ela seria, como falaria e que sensação passaria?</label><textarea id="marcaPessoa" name="marcaPessoa" placeholder="Descreva a personalidade, a forma de falar e a sensação que sua marca deve transmitir."></textarea></div></div>
+          </section>
+
+          <section class="submit-panel">
+            <h3>Enviar briefing</h3>
+            <p class="muted">Depois do envio, você recebe uma confirmação e a Anim4LL pode analisar melhor a direção do projeto.</p>
+            <div class="actions">
+              <button id="submitButton" type="submit">Enviar briefing</button>
+              <span class="mini-note">Recebemos seu briefing com sucesso. Em breve entraremos em contato pelo e-mail ou WhatsApp informado.</span>
+            </div>
+            <div class="mini-note">Para envio automático direto pelo site, troque a constante <code>FORM_ENDPOINT</code> no script pelo seu link do Formspree.</div>
+          </section>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-wrap">
+      <p>Anim4LL • Comunicação, imagem e estratégia</p>
+      <p>
+        <a href="https://bio.site/4ll" target="_blank" rel="noopener noreferrer">bio.site/4ll</a> •
+        <a href="https://www.instagram.com/4nim4ll/" target="_blank" rel="noopener noreferrer">@4nim4ll</a> •
+        <a href="https://wa.me/5531933002072" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5531933002072" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Falar com a Anim4LL no WhatsApp">WhatsApp</a>
+
+  <script>
+    const FORM_ENDPOINT = "https://formspree.io/f/SEU_ID_AQUI";
+    const DESTINATION_EMAIL = "curriculoanim4ll@gmail.com";
+
+    const form = document.getElementById("briefingForm");
+    const notice = document.getElementById("formNotice");
+    const submitButton = document.getElementById("submitButton");
+
+    function showNotice(message, type) {
+      notice.textContent = message;
+      notice.className = `notice show ${type}`;
+      notice.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function getCheckedValues(name) {
+      return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map((item) => item.value).join(", ");
+    }
+
+    function isValidPhone(value) {
+      const digits = value.replace(/\D/g, "");
+      return digits.length >= 10 && digits.length <= 13;
+    }
+
+    function serializeForm() {
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd.entries());
+      data.transmite = getCheckedValues("transmite");
+      data.tomComunicacao = getCheckedValues("tomComunicacao");
+      data.aplicacao = getCheckedValues("aplicacao");
+      return data;
+    }
+
+    function buildEmailBody(data) {
+      return [
+        "Novo briefing recebido pelo site Anim4LL",
+        "",
+        "1. Dados principais",
+        `Empresa ou profissional: ${data.empresa || ""}`,
+        `Responsável: ${data.responsavel || ""}`,
+        `WhatsApp: ${data.whatsapp || ""}`,
+        `E-mail: ${data.email || ""}`,
+        `Cidade e estado: ${data.cidade || ""}`,
+        `Site: ${data.site || ""}`,
+        `Instagram: ${data.instagram || ""}`,
+        `Outras redes: ${data.redes || ""}`,
+        "",
+        "2. Sobre o negócio",
+        `O que faz: ${data.oQueFaz || ""}`,
+        `Produtos/serviços: ${data.servicos || ""}`,
+        `Tempo de atuação: ${data.tempoAtuacao || ""}`,
+        `Diferencial: ${data.diferencial || ""}`,
+        `Percepção desejada: ${data.percepcaoMarca || ""}`,
+        "",
+        "3. Objetivo",
+        `Quer melhorar: ${data.melhorarHoje || ""}`,
+        `Maior dificuldade: ${data.dificuldade || ""}`,
+        `Precisa agora: ${data.precisaAgora || ""}`,
+        `Resultado esperado: ${data.resultadoEsperado || ""}`,
+        "",
+        "4. Público",
+        `Cliente ideal: ${data.clienteIdeal || ""}`,
+        `Para quem quer vender: ${data.querVender || ""}`,
+        `O que valoriza: ${data.valoriza || ""}`,
+        `Fatores de confiança: ${data.confianca || ""}`,
+        "",
+        "5. Posicionamento",
+        `Como a marca deve parecer: ${data.marcaParecer || ""}`,
+        `Palavras que combinam: ${data.palavrasCombinam || ""}`,
+        `Palavras que não combinam: ${data.palavrasNao || ""}`,
+        `Deve transmitir mais: ${data.transmite || ""}`,
+        "",
+        "6. Estilo visual",
+        `Tem logomarca: ${data.temLogo || ""}`,
+        `Tem cores definidas: ${data.temCores || ""}`,
+        `Identidade visual: ${data.identidadeVisual || ""}`,
+        `Gosta visualmente: ${data.gostaVisual || ""}`,
+        `Não gosta visualmente: ${data.naoGostaVisual || ""}`,
+        `Referências: ${data.referencias || ""}`,
+        "",
+        "7. Comunicação",
+        `Tom desejado: ${data.tomComunicacao || ""}`,
+        `Preferência de texto: ${data.textos || ""}`,
+        `Frase/slogan: ${data.frase || ""}`,
+        `O que não quer: ${data.naoQuer || ""}`,
+        "",
+        "8. Materiais disponíveis",
+        `Fotos próprias: ${data.temFotos || ""}`,
+        `Vídeos: ${data.temVideos || ""}`,
+        `Logotipo em boa qualidade: ${data.logoQualidade || ""}`,
+        `Portfólio/catálogo/cardápio/tabela: ${data.portfolio || ""}`,
+        `Depoimentos: ${data.depoimentos || ""}`,
+        "",
+        "9. Aplicação",
+        `Onde será usado: ${data.aplicacao || ""}`,
+        `Prioridade: ${data.prioridade || ""}`,
+        `Urgência: ${data.urgencia || ""}`,
+        "",
+        "10. Comercial",
+        `Faixa de investimento: ${data.investimento || ""}`,
+        `Tipo de projeto: ${data.tipoProjeto || ""}`,
+        `Prazo ideal: ${data.prazo || ""}`,
+        "",
+        "11. Campo aberto",
+        `${data.campoAberto || ""}`,
+        "",
+        "12. Pergunta final estratégica",
+        `${data.marcaPessoa || ""}`
+      ].join("\n");
+    }
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      notice.className = "notice";
+
+      const emailField = document.getElementById("email");
+      const whatsappField = document.getElementById("whatsapp");
+
+      if (!form.reportValidity()) {
+        showNotice("Confira os campos obrigatórios antes de enviar.", "error");
+        return;
+      }
+      if (!isValidPhone(whatsappField.value)) {
+        showNotice("Digite um WhatsApp válido com DDD.", "error");
+        whatsappField.focus();
+        return;
+      }
+      if (!emailField.checkValidity()) {
+        showNotice("Digite um e-mail válido.", "error");
+        emailField.focus();
+        return;
+      }
+
+      const data = serializeForm();
+      const emailBody = buildEmailBody(data);
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Enviando...";
+
+      try {
+        if (!FORM_ENDPOINT || FORM_ENDPOINT.includes("SEU_ID_AQUI")) {
+          const subject = encodeURIComponent("Novo briefing recebido pelo site Anim4LL");
+          const body = encodeURIComponent(emailBody);
+          window.location.href = `mailto:${DESTINATION_EMAIL}?subject=${subject}&body=${body}`;
+          showNotice("O aplicativo de e-mail foi aberto com o briefing preenchido. Para envio automático direto pelo site, configure o Formspree no FORM_ENDPOINT.", "success");
+        } else {
+          const response = await fetch(FORM_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({ ...data, _subject: "Novo briefing recebido pelo site Anim4LL", message: emailBody })
+          });
+          if (!response.ok) throw new Error("Falha no envio");
+          form.reset();
+          showNotice("Recebemos seu briefing com sucesso. Em breve entraremos em contato pelo e-mail ou WhatsApp informado.", "success");
+        }
+      } catch (error) {
+        showNotice("Não foi possível enviar agora. Verifique a configuração do formulário e tente novamente.", "error");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Enviar briefing";
+      }
+    });
+  </script>
+</body>
+</html>
