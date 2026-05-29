@@ -1,0 +1,26 @@
+ANIM4LL — Presença com Olhar / v10 final
+
+Como testar:
+1. Extraia o ZIP.
+2. Abra o arquivo index.html no navegador.
+3. Se subir na Vercel, envie a pasta inteira.
+
+Decisão de direção:
+- v8 como corpo de marca;
+- v9 como força de venda;
+- v7 como acabamento visual;
+- logo menos brilhante;
+- laranja como ação principal;
+- verde discreto para sinais e WhatsApp.
+
+WhatsApp configurado:
+31 93300-2072
+
+Portfólio completo:
+https://instagram.com/felipeaoc
+
+
+VERSAO V11
+- verde atualizado para fluorescente
+- imagem da bola atualizada (escudo coberto)
+- pacote pronto para teste local
