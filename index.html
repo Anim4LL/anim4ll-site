@@ -44,7 +44,8 @@
     section{padding:86px 0;scroll-margin-top:90px}
     .eyebrow{font-size:.75rem;color:var(--green);letter-spacing:.18em;font-weight:900;text-transform:uppercase;margin-bottom:22px}
     .title-row{display:grid;grid-template-columns:1.08fr .7fr;gap:34px;align-items:end;margin-bottom:36px}
-    .title-row h2{font-size:clamp(2.1rem,5vw,5rem);line-height:.92;letter-spacing:-.055em}.title-row h2 span{color:var(--orange)}
+    .title-row h2{font-size:clamp(2.1rem,5vw,5rem);line-height:.92;letter-spacing:-.055em}
+    .title-row h2 span{color:var(--orange)}
     .title-row p{color:var(--muted);font-size:1.12rem}
 
     .hero{min-height:100vh;display:grid;align-items:center;position:relative;padding:112px 0 62px;background:
@@ -53,42 +54,296 @@
       url('hero-por-do-sol.jpg') center center/cover no-repeat,#040404}
     .hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:80px 80px;opacity:.12;mask-image:linear-gradient(90deg,#000,transparent 76%)}
     .hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1fr .82fr;gap:58px;align-items:end}
-    h1{font-size:clamp(3.25rem,8.3vw,8.35rem);line-height:.86;letter-spacing:-.065em;max-width:790px;margin-bottom:24px}h1 span{color:var(--orange)}
-    .hero-text p{font-size:clamp(1.05rem,1.6vw,1.28rem);color:rgba(255,255,255,.78);max-width:620px;margin-bottom:30px}.actions{display:flex;gap:14px;flex-wrap:wrap}
-    .signal-card{border:1px solid rgba(255,255,255,.12);background:rgba(5,5,6,.52);border-radius:32px;padding:28px;backdrop-filter:blur(8px);max-width:390px;justify-self:end}.signal-card small{display:block;color:var(--green);font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}.signal-card strong{display:block;font-size:2rem;line-height:1.05;margin-bottom:12px;color:#fff}.signal-card p{color:var(--muted);font-size:1rem;margin:0}
+    h1{font-size:clamp(3.25rem,8.3vw,8.35rem);line-height:.86;letter-spacing:-.065em;max-width:790px;margin-bottom:24px}
+    h1 span{color:var(--orange)}
+    .hero-text p{font-size:clamp(1.05rem,1.6vw,1.28rem);color:rgba(255,255,255,.78);max-width:620px;margin-bottom:30px}
+    .actions{display:flex;gap:14px;flex-wrap:wrap}
+    .signal-card{border:1px solid rgba(255,255,255,.12);background:rgba(5,5,6,.52);border-radius:32px;padding:28px;backdrop-filter:blur(8px);max-width:390px;justify-self:end}
+    .signal-card small{display:block;color:var(--green);font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+    .signal-card strong{display:block;font-size:2rem;line-height:1.05;margin-bottom:12px;color:#fff}
+    .signal-card p{color:var(--muted);font-size:1rem;margin:0}
 
     .diagnose{background:#050506;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
-    .questions{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.q{min-height:190px;border:1px solid var(--line);border-radius:var(--radius);padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018));position:relative;overflow:hidden}.q::before{content:"";position:absolute;right:-45px;bottom:-45px;width:130px;height:130px;background:radial-gradient(circle,rgba(240,138,26,.16),transparent 65%)}.q b{color:var(--green);font-size:.84rem;letter-spacing:.14em;text-transform:uppercase}.q p{font-size:1.35rem;font-weight:900;line-height:1.15;margin-top:36px}
+    .questions{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .q{min-height:190px;border:1px solid var(--line);border-radius:var(--radius);padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018));position:relative;overflow:hidden}
+    .q::before{content:"";position:absolute;right:-45px;bottom:-45px;width:130px;height:130px;background:radial-gradient(circle,rgba(240,138,26,.16),transparent 65%)}
+    .q b{color:var(--green);font-size:.84rem;letter-spacing:.14em;text-transform:uppercase}
+    .q p{font-size:1.35rem;font-weight:900;line-height:1.15;margin-top:36px}
 
-    .look{background:linear-gradient(90deg,#060606,#09090b)}.look-grid{display:grid;grid-template-columns:.92fr 1fr;gap:52px;align-items:center}.look-img{min-height:610px;border-radius:36px;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.4)),url('olhar-cantor.jpg') center/cover no-repeat;border:1px solid var(--line);box-shadow:0 30px 90px rgba(0,0,0,.5)}.look-copy h2{font-size:clamp(2.5rem,5.4vw,5.8rem);line-height:.9;letter-spacing:-.055em;margin-bottom:22px}.look-copy h2 span{color:var(--orange)}.look-copy p{color:rgba(255,255,255,.76);font-size:1.16rem;max-width:590px;margin-bottom:24px}.quote{border-left:3px solid var(--green);padding-left:18px;font-size:1.25rem;font-weight:900;color:#fff;max-width:560px}
+    .look{background:linear-gradient(90deg,#060606,#09090b)}
+    .look-grid{display:grid;grid-template-columns:.92fr 1fr;gap:52px;align-items:center}
+    .look-img{min-height:610px;border-radius:36px;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.4)),url('olhar-cantor.jpg') center/cover no-repeat;border:1px solid var(--line);box-shadow:0 30px 90px rgba(0,0,0,.5)}
+    .look-copy h2{font-size:clamp(2.5rem,5.4vw,5.8rem);line-height:.9;letter-spacing:-.055em;margin-bottom:22px}
+    .look-copy h2 span{color:var(--orange)}
+    .look-copy p{color:rgba(255,255,255,.76);font-size:1.16rem;max-width:590px;margin-bottom:24px}
+    .quote{border-left:3px solid var(--green);padding-left:18px;font-size:1.25rem;font-weight:900;color:#fff;max-width:560px}
 
-    .paths{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.path{border:1px solid var(--line);border-radius:32px;padding:26px;background:linear-gradient(180deg,rgba(255,255,255,.062),rgba(255,255,255,.02));min-height:520px;display:flex;flex-direction:column;justify-content:space-between}.path-top small{color:var(--green);font-weight:900;letter-spacing:.16em;text-transform:uppercase}.path-top h3{font-size:2.25rem;line-height:.95;margin:14px 0 10px}.path-top p{color:var(--muted)}.offers{display:grid;gap:10px;margin-top:28px}.offer{display:flex;justify-content:space-between;gap:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:12px;color:#fff}.offer span{color:var(--orange);font-weight:900}.path .btn{margin-top:28px;width:100%}
+    .paths{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .path{border:1px solid var(--line);border-radius:32px;padding:26px;background:linear-gradient(180deg,rgba(255,255,255,.062),rgba(255,255,255,.02));min-height:520px;display:flex;flex-direction:column;justify-content:space-between}
+    .path-top small{color:var(--green);font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+    .path-top h3{font-size:2.25rem;line-height:.95;margin:14px 0 10px}
+    .path-top p{color:var(--muted)}
+    .offers{display:grid;gap:10px;margin-top:28px}
+    .offer{display:flex;justify-content:space-between;gap:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:12px;color:#fff}
+    .offer span{color:var(--orange);font-weight:900}
+    .path .btn{margin-top:28px;width:100%}
 
-    .pause{background:#050506}.pause-grid{display:grid;grid-template-columns:1fr .92fr;gap:44px;align-items:center}.pause-copy h2{font-size:clamp(2.3rem,5.2vw,5.6rem);line-height:.92;letter-spacing:-.055em;margin-bottom:20px}.pause-copy h2 span{color:var(--orange)}.pause-copy p{color:var(--muted);font-size:1.12rem;max-width:560px;margin-bottom:26px}.pause-img{min-height:520px;border-radius:36px;background:url('arvore-pausa.jpg') center/cover no-repeat;border:1px solid var(--line);box-shadow:0 30px 90px rgba(0,0,0,.46)}
+    .pause{background:#050506}
+    .pause-grid{display:grid;grid-template-columns:1fr .92fr;gap:44px;align-items:center}
+    .pause-copy h2{font-size:clamp(2.3rem,5.2vw,5.6rem);line-height:.92;letter-spacing:-.055em;margin-bottom:20px}
+    .pause-copy h2 span{color:var(--orange)}
+    .pause-copy p{color:var(--muted);font-size:1.12rem;max-width:560px;margin-bottom:26px}
+    .pause-img{min-height:520px;border-radius:36px;background:url('arvore-pausa.jpg') center/cover no-repeat;border:1px solid var(--line);box-shadow:0 30px 90px rgba(0,0,0,.46)}
 
-    .portfolio{background:#030304}.portfolio-grid{display:grid;grid-template-columns:1.05fr .95fr .95fr;gap:16px}.work{min-height:430px;border-radius:30px;border:1px solid var(--line);padding:24px;display:flex;flex-direction:column;justify-content:flex-end;background-size:cover;background-position:center;position:relative;overflow:hidden}.work::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.84))}.work>*{position:relative}.work small{color:var(--green);font-weight:900;letter-spacing:.16em;text-transform:uppercase}.work h3{font-size:2.4rem;line-height:.96;margin:10px 0 8px}.work p{color:rgba(255,255,255,.78)}.w1{background-image:url('portfolio-esporte.jpg')}.w2{background-image:url('portfolio-guitarrista.jpg')}.w3{background-image:url('universo.jpg')}
+    .portfolio{background:#030304}
+    .portfolio-grid{display:grid;grid-template-columns:1.05fr .95fr .95fr;gap:16px}
+    .work{min-height:430px;border-radius:30px;border:1px solid var(--line);padding:24px;display:flex;flex-direction:column;justify-content:flex-end;background-size:cover;background-position:center;position:relative;overflow:hidden}
+    .work::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.84))}
+    .work>*{position:relative}
+    .work small{color:var(--green);font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+    .work h3{font-size:2.4rem;line-height:.96;margin:10px 0 8px}
+    .work p{color:rgba(255,255,255,.78)}
+    .w1{background-image:url('portfolio-esporte.jpg')}
+    .w2{background-image:url('portfolio-guitarrista.jpg')}
+    .w3{background-image:url('universo.jpg')}
 
-    .gps{background:linear-gradient(180deg,#050506,#090705)}.gps-grid{display:grid;grid-template-columns:.9fr 1fr;gap:42px;align-items:center}.gps-img{min-height:520px;border-radius:36px;background:url('estagiarios-gps.jpg') center/cover no-repeat;border:1px solid var(--line)}.gps h2{font-size:clamp(2.1rem,5vw,5rem);line-height:.92;letter-spacing:-.055em;margin-bottom:18px}.gps h2 span{color:var(--orange)}.gps p{color:var(--muted);font-size:1.12rem;max-width:610px}
+    .gps{background:linear-gradient(180deg,#050506,#090705)}
+    .gps-grid{display:grid;grid-template-columns:.9fr 1fr;gap:42px;align-items:center}
+    .gps-img{min-height:520px;border-radius:36px;background:url('estagiarios-gps.jpg') center/cover no-repeat;border:1px solid var(--line)}
+    .gps h2{font-size:clamp(2.1rem,5vw,5rem);line-height:.92;letter-spacing:-.055em;margin-bottom:18px}
+    .gps h2 span{color:var(--orange)}
+    .gps p{color:var(--muted);font-size:1.12rem;max-width:610px}
 
-    .final{min-height:620px;display:flex;align-items:center;background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.62),rgba(0,0,0,.95)),url('fundo-bola-v11.png') center/cover no-repeat}.final h2{font-size:clamp(2.8rem,7vw,7.4rem);line-height:.88;letter-spacing:-.065em;max-width:900px;margin-bottom:22px}.final h2 span{color:var(--orange)}.final p{color:rgba(255,255,255,.78);font-size:1.16rem;max-width:620px;margin-bottom:30px}
+    .final{min-height:620px;display:flex;align-items:center;background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.62),rgba(0,0,0,.95)),url('fundo-bola-v11.png') center/cover no-repeat}
+    .final h2{font-size:clamp(2.8rem,7vw,7.4rem);line-height:.88;letter-spacing:-.065em;max-width:900px;margin-bottom:22px}
+    .final h2 span{color:var(--orange)}
+    .final p{color:rgba(255,255,255,.78);font-size:1.16rem;max-width:620px;margin-bottom:30px}
+
     footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;color:var(--muted)}
 
-    @media(max-width:980px){.menu{display:none}.hero .container,.title-row,.questions,.look-grid,.paths,.pause-grid,.portfolio-grid,.gps-grid{grid-template-columns:1fr}.signal-card{justify-self:start}.look-img,.pause-img,.gps-img{min-height:420px}}
-    @media(max-width:620px){.nav{height:70px}.logo-img{height:30px}.whats{padding:10px 14px;font-size:.9rem}h1{letter-spacing:-.045em}.hero{padding-top:96px}.q p{font-size:1.2rem}.path{min-height:auto}.final h2{letter-spacing:-.045em}}
+    @media(max-width:980px){
+      .menu{display:none}
+      .hero .container,.title-row,.questions,.look-grid,.paths,.pause-grid,.portfolio-grid,.gps-grid{grid-template-columns:1fr}
+      .signal-card{justify-self:start}
+      .look-img,.pause-img,.gps-img{min-height:420px}
+    }
+
+    @media(max-width:620px){
+      .nav{height:70px}
+      .logo-img{height:30px}
+      .whats{padding:10px 14px;font-size:.9rem}
+      h1{letter-spacing:-.045em}
+      .hero{padding-top:96px}
+      .q p{font-size:1.2rem}
+      .path{min-height:auto}
+      .final h2{letter-spacing:-.045em}
+    }
   </style>
 </head>
 <body>
-  <header><div class="container nav"><a href="#top"><img class="logo-img" src="logo-anim4ll-header.png" alt="ANIM4LL"></a><nav class="menu"><a href="#diagnostico">Diagnóstico</a><a href="#olhar">Olhar</a><a href="#servicos">Serviços</a><a href="#portfolio">Portfólio</a></nav><a class="whats" href="https://wa.me/5531933002072?text=Ola%2C%20Felipe.%20Quero%20que%20voce%20olhe%20minha%20presenca%20digital." target="_blank" rel="noopener">WhatsApp</a></div></header>
+  <header>
+    <div class="container nav">
+      <a href="#top">
+        <img class="logo-img" src="logo-anim4ll-header.png" alt="ANIM4LL">
+      </a>
+
+      <nav class="menu">
+        <a href="#diagnostico">Diagnóstico</a>
+        <a href="#olhar">Olhar</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#portfolio">Portfólio</a>
+      </nav>
+
+      <a class="whats" href="https://wa.me/5531933002072?text=Ola%2C%20Felipe.%20Quero%20que%20voce%20olhe%20minha%20presenca%20digital." target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </header>
+
   <main id="top">
-    <section class="hero"><div class="container"><div class="hero-text"><div class="eyebrow">ANIM4LL / presença com olhar</div><h1>Sua marca parece <span>menor</span> do que ela é.</h1><p>Eu organizo imagem, texto, WhatsApp e página para o cliente entender, confiar e chamar.</p><div class="actions"><a class="btn btn-main" href="https://wa.me/5531933002072?text=Ola%2C%20Felipe.%20Quero%20que%20voce%20olhe%20minha%20presenca%20digital." target="_blank">Quero que você olhe</a><a class="btn btn-outline" href="#diagnostico">Ver diagnóstico</a></div></div><aside class="signal-card"><small>primeiro sinal</small><strong>Não é falta de conteúdo.</strong><p>Na maioria das vezes, é falta de direção visual, texto claro e caminho simples até o WhatsApp.</p></aside></div></section>
-    <section id="diagnostico" class="diagnose"><div class="container"><div class="title-row"><h2>Antes de postar mais, veja onde sua presença <span>vaza</span>.</h2><p>Quatro pontos que fazem um bom negócio parecer improvisado.</p></div><div class="questions"><div class="q"><b>bio</b><p>Explica o que você faz?</p></div><div class="q"><b>imagem</b><p>Passa confiança rápido?</p></div><div class="q"><b>WhatsApp</b><p>Conduz ou deixa solto?</p></div><div class="q"><b>link</b><p>Ajuda ou confunde?</p></div></div><div style="margin-top:28px"><a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20fazer%20um%20Raio-X%20da%20minha%20presenca%20digital." target="_blank">Fazer Raio-X da minha presença</a></div></div></section>
-    <section id="olhar" class="look"><div class="container look-grid"><div class="look-img"></div><div class="look-copy"><h2>O que importa nem sempre está <span>nítido</span>.</h2><p>A ANIM4LL nasce desse lugar: observar ruído, gesto, falha, excesso e transformar isso em presença compreensível.</p><div class="quote">Antes de vender mais, muita marca precisa ser percebida melhor.</div><div style="margin-top:28px"><a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20esse%20olhar%20no%20meu%20perfil." target="_blank">Quero esse olhar</a></div></div></div></section>
-    <section id="servicos"><div class="container"><div class="title-row"><h2>Escolha um caminho. <span>Eu organizo</span>.</h2><p>Menos pacote confuso. Mais entrada simples para começar.</p></div><div class="paths"><article class="path"><div class="path-top"><small>01 / começar</small><h3>Arrumar o básico</h3><p>Para quem precisa sair do improviso sem gastar muito.</p><div class="offers"><div class="offer">Garimpo Visual <span>R$27</span></div><div class="offer">Bio de Confiança <span>R$37</span></div><div class="offer">Raio-X de Presença <span>R$47</span></div></div></div><a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20comecar%20arrumando%20o%20basico%20da%20minha%20presenca." target="_blank">Começar por aqui</a></article><article class="path"><div class="path-top"><small>02 / organizar</small><h3>Dar direção</h3><p>Para quem já aparece, mas ainda não conduz o cliente.</p><div class="offers"><div class="offer">Atendimento Pronto <span>R$67</span></div><div class="offer">Voz da Marca <span>R$97</span></div><div class="offer">Fachada Digital <span>R$97</span></div></div></div><a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20dar%20direcao%20para%20minha%20presenca%20digital." target="_blank">Dar direção</a></article><article class="path"><div class="path-top"><small>03 / apresentar</small><h3>Virar vitrine</h3><p>Para transformar presença em página, prova e chamada.</p><div class="offers"><div class="offer">Vitrine de Bolso <span>R$197</span></div><div class="offer">Imagem de Autoridade <span>consulta</span></div><div class="offer">Página de oferta <span>consulta</span></div></div></div><a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20transformar%20minha%20presenca%20em%20vitrine." target="_blank">Virar vitrine</a></article></div></div></section>
-    <section class="pause"><div class="container pause-grid"><div class="pause-copy"><div class="eyebrow">movimento / respiro</div><h2>Movimento também precisa de <span>pausa</span>.</h2><p>Sua marca não precisa correr para todos os lados. Precisa encontrar direção, sombra e um ponto claro para o cliente chegar.</p><a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20organizar%20minha%20presenca%20com%20mais%20direcao." target="_blank">Organizar com direção</a></div><div class="pause-img"></div></div></section>
-    <section id="portfolio" class="portfolio"><div class="container"><div class="title-row"><h2>Portfólio com <span>pulso</span>.</h2><p>Instagram mostra o volume. Aqui entra a direção do olhar.</p></div><div class="portfolio-grid"><article class="work w1"><small>território</small><h3>Movimento.</h3><p>Comunidade, disputa e memória.</p></article><article class="work w2"><small>cultura</small><h3>Atmosfera.</h3><p>Gesto, sombra e intensidade.</p></article><article class="work w3"><small>universo</small><h3>Assinatura.</h3><p>Imagem, pensamento e direção.</p></article></div><div style="text-align:center;margin-top:30px"><a class="btn btn-outline" href="https://instagram.com/felipeaoc" target="_blank">Ver Instagram completo</a></div></div></section>
-    <section class="gps"><div class="container gps-grid"><div class="gps-img"></div><div><div class="eyebrow">bastidor / gps criativo</div><h2>Até o caos precisa de <span>companhia</span>.</h2><p>Siri, Gemi e Pixel entram como lembrança: a ANIM4LL tem tecnologia, mas também tem casa, humor, rotina e vida real.</p></div></div></section>
-    <section class="final"><div class="container"><h2>Me chama antes de postar mais coisa <span>solta</span>.</h2><p>O problema talvez não seja falta de conteúdo. É falta de presença.</p><a class="btn btn-main" href="https://wa.me/5531933002072?text=Ola%2C%20Felipe.%20Quero%20organizar%20minha%20presenca%20com%20a%20ANIM4LL." target="_blank">Chamar Felipe no WhatsApp</a></div></section>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-text">
+          <div class="eyebrow">ANIM4LL / presença com olhar</div>
+          <h1>Sua marca parece <span>menor</span> do que ela é.</h1>
+          <p>Eu organizo imagem, texto, WhatsApp e página para o cliente entender, confiar e chamar.</p>
+
+          <div class="actions">
+            <a class="btn btn-main" href="https://wa.me/5531933002072?text=Ola%2C%20Felipe.%20Quero%20que%20voce%20olhe%20minha%20presenca%20digital." target="_blank">Quero que você olhe</a>
+            <a class="btn btn-outline" href="#diagnostico">Ver diagnóstico</a>
+          </div>
+        </div>
+
+        <aside class="signal-card">
+          <small>primeiro sinal</small>
+          <strong>Não é falta de conteúdo.</strong>
+          <p>Na maioria das vezes, é falta de direção visual, texto claro e caminho simples até o WhatsApp.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="diagnostico" class="diagnose">
+      <div class="container">
+        <div class="title-row">
+          <h2>Antes de postar mais, veja onde sua presença <span>vaza</span>.</h2>
+          <p>Quatro pontos que fazem um bom negócio parecer improvisado.</p>
+        </div>
+
+        <div class="questions">
+          <div class="q"><b>bio</b><p>Explica o que você faz?</p></div>
+          <div class="q"><b>imagem</b><p>Passa confiança rápido?</p></div>
+          <div class="q"><b>WhatsApp</b><p>Conduz ou deixa solto?</p></div>
+          <div class="q"><b>link</b><p>Ajuda ou confunde?</p></div>
+        </div>
+
+        <div style="margin-top:28px">
+          <a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20fazer%20um%20Raio-X%20da%20minha%20presenca%20digital." target="_blank">Fazer Raio-X da minha presença</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="olhar" class="look">
+      <div class="container look-grid">
+        <div class="look-img"></div>
+
+        <div class="look-copy">
+          <h2>O que importa nem sempre está <span>nítido</span>.</h2>
+          <p>A ANIM4LL nasce desse lugar: observar ruído, gesto, falha, excesso e transformar isso em presença compreensível.</p>
+          <div class="quote">Antes de vender mais, muita marca precisa ser percebida melhor.</div>
+
+          <div style="margin-top:28px">
+            <a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20esse%20olhar%20no%20meu%20perfil." target="_blank">Quero esse olhar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="container">
+        <div class="title-row">
+          <h2>Escolha um caminho. <span>Eu organizo</span>.</h2>
+          <p>Menos pacote confuso. Mais entrada simples para começar.</p>
+        </div>
+
+        <div class="paths">
+          <article class="path">
+            <div class="path-top">
+              <small>01 / começar</small>
+              <h3>Arrumar o básico</h3>
+              <p>Para quem precisa sair do improviso sem gastar muito.</p>
+
+              <div class="offers">
+                <div class="offer">Garimpo Visual <span>R$27</span></div>
+                <div class="offer">Bio de Confiança <span>R$37</span></div>
+                <div class="offer">Raio-X de Presença <span>R$47</span></div>
+              </div>
+            </div>
+
+            <a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20comecar%20arrumando%20o%20basico%20da%20minha%20presenca." target="_blank">Começar por aqui</a>
+          </article>
+
+          <article class="path">
+            <div class="path-top">
+              <small>02 / organizar</small>
+              <h3>Dar direção</h3>
+              <p>Para quem já aparece, mas ainda não conduz o cliente.</p>
+
+              <div class="offers">
+                <div class="offer">Atendimento Pronto</div>
+                <div class="offer">Voz da Marca</div>
+                <div class="offer">Fachada Digital</div>
+              </div>
+            </div>
+
+            <a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20dar%20direcao%20para%20minha%20presenca%20digital." target="_blank">Dar direção</a>
+          </article>
+
+          <article class="path">
+            <div class="path-top">
+              <small>03 / apresentar</small>
+              <h3>Virar vitrine</h3>
+              <p>Para transformar presença em página, prova e chamada.</p>
+
+              <div class="offers">
+                <div class="offer">Vitrine de Bolso <span>R$197</span></div>
+                <div class="offer">Imagem de Autoridade <span>consulta</span></div>
+                <div class="offer">Página de oferta <span>consulta</span></div>
+              </div>
+            </div>
+
+            <a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20transformar%20minha%20presenca%20em%20vitrine." target="_blank">Virar vitrine</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pause">
+      <div class="container pause-grid">
+        <div class="pause-copy">
+          <div class="eyebrow">movimento / respiro</div>
+          <h2>Movimento também precisa de <span>pausa</span>.</h2>
+          <p>Sua marca não precisa correr para todos os lados. Precisa encontrar direção, sombra e um ponto claro para o cliente chegar.</p>
+          <a class="btn btn-main" href="https://wa.me/5531933002072?text=Quero%20organizar%20minha%20presenca%20com%20mais%20direcao." target="_blank">Organizar com direção</a>
+        </div>
+
+        <div class="pause-img"></div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+        <div class="title-row">
+          <h2>Portfólio com <span>pulso</span>.</h2>
+          <p>Instagram mostra o volume. Aqui entra a direção do olhar.</p>
+        </div>
+
+        <div class="portfolio-grid">
+          <article class="work w1">
+            <small>território</small>
+            <h3>Movimento.</h3>
+            <p>Comunidade, disputa e memória.</p>
+          </article>
+
+          <article class="work w2">
+            <small>cultura</small>
+            <h3>Atmosfera.</h3>
+            <p>Gesto, sombra e intensidade.</p>
+          </article>
+
+          <article class="work w3">
+            <small>universo</small>
+            <h3>Assinatura.</h3>
+            <p>Imagem, pensamento e direção.</p>
+          </article>
+        </div>
+
+        <div style="text-align:center;margin-top:30px">
+          <a class="btn btn-outline" href="https://instagram.com/felipeaoc" target="_blank">Ver Instagram completo</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="gps">
+      <div class="container gps-grid">
+        <div class="gps-img"></div>
+
+        <div>
+          <div class="eyebrow">bastidor / gps criativo</div>
+          <h2>Até o caos precisa de <span>companhia</span>.</h2>
+          <p>Siri, Gemi e Pixel entram como lembrança: a ANIM4LL tem tecnologia, mas também tem casa, humor, rotina e vida real.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="container">
+        <h2>Me chama antes de postar mais coisa <span>solta</span>.</h2>
+        <p>O problema talvez não seja falta de conteúdo. É falta de presença.</p>
+        <a class="btn btn-main" href="https://wa.me/5531933002072?text=Ola%2C%20Felipe.%20Quero%20organizar%20minha%20presenca%20com%20a%20ANIM4LL." target="_blank">Chamar Felipe no WhatsApp</a>
+      </div>
+    </section>
   </main>
-  <footer><div class="container">ANIM4LL — onde a imagem ganha direção e a presença vira chamada.</div></footer>
+
+  <footer>
+    <div class="container">ANIM4LL — onde a imagem ganha direção e a presença vira chamada.</div>
+  </footer>
 </body>
 </html>
