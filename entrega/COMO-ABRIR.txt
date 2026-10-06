@@ -1,0 +1,3 @@
+Descompacte anim4ll-site.zip e abra index.html no Chrome. Clique em Explorar Atmosfera para abrir a página de projeto. HTML, CSS e imagens usam caminhos relativos; não há JavaScript nem instalação. WhatsApp e Instagram precisam de internet.
+Capturas: home e Atmosfera, desktop 1440 px e celular 390 px.
+Validação: ZIP íntegro; arquivos, caminhos relativos e âncoras conferidos após extração. Páginas verificadas por HTTP no Chromium. A abertura por file:// foi bloqueada pela política administrativa do ambiente; Chrome no macOS não foi executado.
